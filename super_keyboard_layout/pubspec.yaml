@@ -10,7 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  super_native_extensions: ^0.8.22
+  super_native_extensions:
+    git:
+      url: https://github.com/koutja/super_native_extensions.git
+      path: super_native_extensions
+      ref: main
 dev_dependencies:
   flutter_test:
     sdk: flutter

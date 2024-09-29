@@ -10,7 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  super_native_extensions: ^0.8.22
+#  super_native_extensions: ^0.8.22
+  super_native_extensions:
+    git:
+      url: https://github.com/koutja/super_native_extensions.git
+      path: super_native_extensions
+      ref: main
   collection: ^1.16.0
   device_info_plus: ^10.0.1
   pixel_snap: ^0.1.1

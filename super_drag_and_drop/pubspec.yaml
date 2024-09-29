@@ -11,8 +11,16 @@ dependencies:
   flutter:
     sdk: flutter
   collection: ^1.16.0
-  super_native_extensions: ^0.8.22
-  super_clipboard: ^0.8.22
+  super_native_extensions:
+    git:
+      url: https://github.com/koutja/super_native_extensions.git
+      path: super_native_extensions
+      ref: main
+  super_clipboard:
+    git:
+      url: https://github.com/koutja/super_native_extensions.git
+      path: super_clipboard
+      ref: main
 dev_dependencies:
   flutter_test:
     sdk: flutter

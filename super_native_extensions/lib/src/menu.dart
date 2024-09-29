@@ -40,8 +40,7 @@ class MobileMenuConfiguration {
     required this.previewBuilder,
     required this.menuWidgetBuilder,
     required this.iconTheme,
-  }) : assert(previewImage == null || previewSize == null,
-            'previewImage and previewSize are mutually exclusive');
+  }) : assert(previewImage == null || previewSize == null, 'previewImage and previewSize are mutually exclusive');
 
   final int configurationId;
   final TargetedWidgetSnapshot liftImage;
@@ -159,6 +158,7 @@ abstract class MenuContext {
       if (_instance == null) {
         if (!kIsWeb &&
             (defaultTargetPlatform == TargetPlatform.android ||
+                defaultTargetPlatform == TargetPlatform.iOS ||
                 defaultTargetPlatform == TargetPlatform.windows)) {
           _instance = FlutterMenuContext();
         } else {
