@@ -1,3 +1,32 @@
+## 0.9.1
+
+## 0.9.0
+
+## 0.9.0-dev.6
+
+## 0.9.0-dev.5
+
+## 0.9.0-dev.4
+
+## 0.9.0-dev.3
+
+## 0.9.0-dev.2
+
+## 0.9.0-dev.1
+
+ - Bump "super_context_menu" to `0.9.0-dev.1`.
+
+## 0.8.24
+
+## 0.8.23
+
+ - Bump "super_context_menu" to `0.8.23`.
+
+## 0.8.23-dev.1
+
+ - **FEAT**: improve focus interaction with non-native context menu (#442).
+ - **FEAT**(macOS): preliminary support for writing tools (#441).
+
 ## 0.8.22
 
  - **FEAT**: export default builder to make it enable for use single brightness (#416).

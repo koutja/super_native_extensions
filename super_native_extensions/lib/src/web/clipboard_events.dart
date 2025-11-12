@@ -1,5 +1,5 @@
 import 'dart:js_interop';
-
+import 'dart:js_interop_unsafe';
 import 'package:web/web.dart' as web;
 
 import '../clipboard_events.dart';
@@ -34,6 +34,15 @@ class _PasteEvent extends ClipboardReadEvent {
 class _WriteEvent extends ClipboardWriteEvent {
   _WriteEvent({required this.event});
 
+  @override
+  Object beginWrite() {
+    // Not needed for synchronous events;
+    return const Object();
+  }
+
+  @override
+  bool get isSynchronous => true;
+
   void _setData(String type, Object? data) {
     if (data is! String) {
       throw UnsupportedError('HTML Clipboard event only supports String data.');
@@ -42,7 +51,7 @@ class _WriteEvent extends ClipboardWriteEvent {
   }
 
   @override
-  void write(List<DataProviderHandle> providers) {
+  void write(Object token, List<DataProviderHandle> providers) {
     event.preventDefault();
     for (final provider in providers) {
       for (final repr in provider.provider.representations) {
@@ -64,10 +73,29 @@ class _WriteEvent extends ClipboardWriteEvent {
 }
 
 class ClipboardEventsImpl extends ClipboardEvents {
+  static const listenersProperty =
+      "super_native_extensions_clipboard_events_listeners";
+
   ClipboardEventsImpl() {
-    web.window.addEventListener('paste', _onPaste.toJS);
-    web.window.addEventListener('copy', _onCopy.toJS);
-    web.window.addEventListener('cut', _onCut.toJS);
+    // Have no access to `registerHotRestartListener` so this needs to be done manually on startup.
+    {
+      final listeners = web.window.getProperty(listenersProperty.toJS)
+          as JSArray<JSListener>?;
+      if (listeners != null) {
+        for (final listener in listeners.toDart) {
+          web.window.removeEventListener(listener.type, listener.callback);
+        }
+      }
+    }
+    final listeners = [
+      JSListener(type: 'paste', callback: _onPaste.toJS),
+      JSListener(type: 'copy', callback: _onCopy.toJS),
+      JSListener(type: 'cut', callback: _onCut.toJS),
+    ];
+    for (final listener in listeners) {
+      web.window.addEventListener(listener.type, listener.callback);
+    }
+    web.window.setProperty(listenersProperty.toJS, listeners.toJS);
   }
 
   @override
@@ -150,4 +178,10 @@ class ClipboardEventsImpl extends ClipboardEvents {
       void Function(ClipboardWriteEvent p1) listener) {
     _cutEventListeners.remove(listener);
   }
+
+  @override
+  void registerTextEventListener(bool Function(TextEvent) listener) {}
+
+  @override
+  void unregisterTextEventListener(bool Function(TextEvent) listener) {}
 }

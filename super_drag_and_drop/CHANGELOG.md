@@ -1,3 +1,33 @@
+## 0.9.1
+
+## 0.9.0
+
+## 0.9.0-dev.6
+
+ - **DOCS**: fix typo (#473).
+
+## 0.9.0-dev.5
+
+## 0.9.0-dev.4
+
+## 0.9.0-dev.3
+
+ - **FEAT**: increase hit slop required for dragging on desktop (#463).
+
+## 0.9.0-dev.2
+
+## 0.9.0-dev.1
+
+ - Bump "super_drag_and_drop" to `0.9.0-dev.1`.
+
+## 0.8.24
+
+## 0.8.23
+
+ - Bump "super_drag_and_drop" to `0.8.23`.
+
+## 0.8.23-dev.1
+
 ## 0.8.22
 
 ## 0.8.21
